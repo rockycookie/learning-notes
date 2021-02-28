@@ -33,10 +33,25 @@
     - Trust companies
     - Insurance companies
 - What do they do:
-    - ACT on their client's behalf as agents in the transfer of finanical instruments between investors
-    - ACT, sometimes, as pricipals, instead of agents
-    - Help to transfer capital from suppliers to users through the underwriting and distribution of new securities in the primary market
-        - ex: IPO
-    - MAINTAIN secondary markets in which priviously issued or outstanding securities can be tradded.
-        - ex: Stocks are tradded through the TSX (Torronto Stock Excahnge)
-    - OWN the securities as part of their inventory, at some stage of transactions with investors
+    - Principal function
+        - In primary market, they act as principals by underwriting: buy an issue and sell it later
+        - In secondary market, they act as principals by maintaining: buy, hold and sell securities  
+    - Agency function
+        - ACT on their client's behalf as agents in the transfer of finanical instruments between investors
+- Three types:
+    - Retail firm
+        - Full-service investment dealers
+            - offer products, services and advices to retail investor
+        - Self-directed brokers (discount brokers)
+            - do not provide investment advice
+    - Institutional firm
+        - serve exclusively institutional clients that trade large volume of securities
+        - institutional clients include:
+            - Pension funds, Mutual funds, Domestic/Foreign institution firm
+    - Integrated firm
+        - Combination of both
+- Organizations within firms
+    - Front office => profolio management
+    - Middle office => firm operation efficiency (compliance, accounting, audit, legal)
+    - Back office => settle the firm's transactions
+    - Senior management

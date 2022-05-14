@@ -1,2 +1,6 @@
 # Java binary
 *.class
+*.jar
+
+# Compliers
+kotlinc

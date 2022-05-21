@@ -4,3 +4,7 @@
 
 # Compliers
 kotlinc
+
+# Gradle
+build
+gradle*

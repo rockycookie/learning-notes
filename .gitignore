@@ -8,3 +8,6 @@ kotlinc
 # Gradle
 build
 gradle*
+
+# Tar
+*.tar

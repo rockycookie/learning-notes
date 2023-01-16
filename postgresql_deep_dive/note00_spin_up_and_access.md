@@ -25,3 +25,16 @@ Note:
 
 # psql -h localhost -p 5432 -U postgres
 ```
+
+<br/>
+
+## To install helper executables
+```
+# cat /etc/issue
+Debian GNU/Linux 10 \n \l
+
+# apt update
+# apt upgrade
+# apt-get install procps
+# apt-get install less
+```

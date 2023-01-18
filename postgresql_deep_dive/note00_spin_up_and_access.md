@@ -38,3 +38,9 @@ Debian GNU/Linux 10 \n \l
 # apt-get install procps
 # apt-get install less
 ```
+
+<br/>
+
+## To init database
+
+Use https://github.com/lukeZhangMengxi/blackjack_server/blob/master/db/psql_schema.sql

@@ -15,8 +15,8 @@ A backgrounf process contains:
     - About cost
         - `costsize.c` defines methods of cots calculation, e.g.: `cost_seqscan()`, `cost_index()`
         - Types of cost:
-            - initialization cost (to reach the first page/block of the target relation file)
-            - operation cost (to find all expected results)
+            - startup cost (to reach the first page/block of any possible relation file)
+            - execution cost (to find all expected results)
             - total cost (sum of the two above)
         - Cost will be displayed by `EXPLAIN` cmd
 5. Executor - (execute the plan tree)

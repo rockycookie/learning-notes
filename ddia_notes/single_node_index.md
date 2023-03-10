@@ -9,18 +9,19 @@
 
 ## How to write to disk
 Comparing:
-- Appending and segment merging
-    - Faster
-    - Concurrency and crash recovery are much simpler
-    - Avoids data file fragmentation (deleting old files)
+- Sequential writes
+    - Appending (sequential writes) and segment merging (write merged to new and delete previous files)
+        - Faster
+        - Concurrency and crash recovery are much simpler
+        - Avoids data file fragmentation (deleting old files)
 - Random writes
 
 <br/>
 
-## Hash Table Index
+## Hash Index
 ### Scenario, KV-pair storage: frequent write, small number of (small-sized) keys
 - Examples:
-    - key might be the URL of a cat video, and the value might be the number of times it has been played
+    - key might be the URL of a video, and the value might be the number of times it has been played
         - in this kind of workload, there are a lot of writes, but there are NOT too many distinct keys
 - In-memory hash map, mapped to file-byte-offset
 - New value append to a file on the disk
@@ -44,7 +45,7 @@ Crash recovery
 
 <br/>
 
-How it works
+### How it works
 
 - How to insert: 
     1. Simply appending to the most recent segment file
@@ -59,7 +60,7 @@ How it works
     2. Use the value read from the hash map (segment file byte-offset) to fetch the actual data from the disk
 
 - How to delete:
-    1. append a special deletion record to the data file(sometimes called a tombstone)
+    1. append a special deletion record to the data file
     2. When log segments are merged, the tombstone tells the merging process to discard any previous values for the deleted key
 
 <br/>
@@ -67,3 +68,40 @@ How it works
 ### Limitations
 - The hash table must fit in memory
 - Range queries are not efficient
+
+<br/><br/>
+
+## SSTable (Sorted String Table)
+
+### How it works:
+- How to insert:
+    1. Add the key-value pair into an in-memory balanced search tree data strcuture
+    2. When the in-memory tree grows larger than certain threshold, write it into disk as a SSTable file
+        - Sequential write to disk as the keys are sorted already
+        - The threshold is typically a few MB
+        - The new SSTable file becomes the most reecent segment of the db
+        - When SSTable is being written to disk, new writes go to a new in-memory tree
+    3. Background thread/proc merging segments via MergeSort ALG
+        - We still need an in-memory structure to record disk memory offset, but now it can be sparse
+            - one key for every few kilobytes of segment file is sufficient
+        - Combine segment files and discard overwritten or deleted values
+            - Create new merged sorted segnment file
+                1. Read segment files (which are sorted already) side-by-side
+                2. Copy the lowest key to the new file
+                3. Repeat
+                4. When multiple segments have the same key, pick the one in the most recent segment
+
+- How to read
+    1. Search the key in the in-memory balanced search tree
+    2. Then in the most recent on-disk segment and then the next most recent segment
+
+<br/>
+
+### Pros & Cons
+- Pros
+    - Same memory supports more keys (not every key has to be stored in memory)
+    - Merging segments is simple and efficient, even if the files are bigger than the available memory
+    - Small number of high-frequency writes are mostly in-memory, **FAST**
+        - Suitable for pattern where we have big number of keys but in a time window, high-frequency writes only go to small number of keys
+- Cons
+    -  When crashes, the most recent writes (which are in the memtable but not yet written out to disk) are lost. In order to avoid that problem, we can keep a separate log on disk to which every write is immediately appended **More Disk Write**

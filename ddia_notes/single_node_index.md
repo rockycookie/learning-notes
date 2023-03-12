@@ -18,7 +18,7 @@ Comparing:
 
 <br/>
 
-## Hash Index
+## Hash Table + Sequential Writes
 ### Scenario, KV-pair storage: frequent write, small number of (small-sized) keys
 - Examples:
     - key might be the URL of a video, and the value might be the number of times it has been played
@@ -69,9 +69,12 @@ Crash recovery
 - The hash table must fit in memory
 - Range queries are not efficient
 
+
 <br/><br/>
 
-## SSTable (Sorted String Table)
+
+## SSTable (Sorted String Table) or LSM-Tree (Log-Structure Merge Tree)
+Balanced Tree + Sequential Writes
 
 ### How it works:
 - How to insert:
@@ -101,7 +104,17 @@ Crash recovery
 - Pros
     - Same memory supports more keys (not every key has to be stored in memory)
     - Merging segments is simple and efficient, even if the files are bigger than the available memory
-    - Small number of high-frequency writes are mostly in-memory, **FAST**
+    - Small number of high-frequency writes are mostly in-memory, **FAST for writes**
         - Suitable for pattern where we have big number of keys but in a time window, high-frequency writes only go to small number of keys
 - Cons
-    -  When crashes, the most recent writes (which are in the memtable but not yet written out to disk) are lost. In order to avoid that problem, we can keep a separate log on disk to which every write is immediately appended **More Disk Write**
+    -  When crashes, the most recent writes (which are in the memtable but not yet written out to disk) are lost.
+        - We can keep a **separate log** on disk to which every write is immediately appended, More Disk Write
+    - To confirm a key does not exist in the database, we need to look up each segment tree (a lot of disk writes)
+        - A **bloom filter** is a memory-efficient data structure for approximating the contents of a set. It can tell you if a key does not exists
+appear in the database
+
+
+<br/><br/>
+
+
+

@@ -1,0 +1,34 @@
+2024-07-22T02:39:18.325807504Z stderr F I0722 02:39:18.325424       1 main.go:316] probe TCP address mg-cluster-control-plane:6443
+2024-07-22T02:39:18.327993629Z stderr F I0722 02:39:18.327767       1 main.go:102] connected to apiserver: https://mg-cluster-control-plane:6443
+2024-07-22T02:39:18.328006212Z stderr F I0722 02:39:18.327831       1 main.go:107] hostIP = 172.18.0.3
+2024-07-22T02:39:18.328008046Z stderr F podIP = 172.18.0.3
+2024-07-22T02:39:18.328009754Z stderr F I0722 02:39:18.327902       1 main.go:116] setting mtu 1500 for CNI 
+2024-07-22T02:39:18.328011296Z stderr F I0722 02:39:18.327909       1 main.go:146] kindnetd IP family: "ipv4"
+2024-07-22T02:39:18.328012879Z stderr F I0722 02:39:18.327916       1 main.go:150] noMask IPv4 subnets: [10.244.0.0/16]
+2024-07-22T02:39:18.724220921Z stderr F I0722 02:39:18.723975       1 main.go:223] Handling node with IPs: map[172.18.0.5:{}]
+2024-07-22T02:39:18.724232587Z stderr F I0722 02:39:18.724009       1 main.go:250] Node mg-cluster-control-plane has CIDR [10.244.0.0/24] 
+2024-07-22T02:39:18.724234962Z stderr F I0722 02:39:18.724066       1 routes.go:62] Adding route {Ifindex: 0 Dst: 10.244.0.0/24 Src: <nil> Gw: 172.18.0.5 Flags: [] Table: 0} 
+2024-07-22T02:39:18.724236629Z stderr F I0722 02:39:18.724101       1 main.go:223] Handling node with IPs: map[172.18.0.2:{}]
+2024-07-22T02:39:18.724299337Z stderr F I0722 02:39:18.724105       1 main.go:250] Node mg-cluster-worker has CIDR [10.244.3.0/24] 
+2024-07-22T02:39:18.724303921Z stderr F I0722 02:39:18.724124       1 routes.go:62] Adding route {Ifindex: 0 Dst: 10.244.3.0/24 Src: <nil> Gw: 172.18.0.2 Flags: [] Table: 0} 
+2024-07-22T02:39:18.724305421Z stderr F I0722 02:39:18.724140       1 main.go:223] Handling node with IPs: map[172.18.0.3:{}]
+2024-07-22T02:39:18.724307212Z stderr F I0722 02:39:18.724143       1 main.go:227] handling current node
+2024-07-22T02:39:18.728841921Z stderr F I0722 02:39:18.728730       1 main.go:223] Handling node with IPs: map[172.18.0.4:{}]
+2024-07-22T02:39:18.728850837Z stderr F I0722 02:39:18.728742       1 main.go:250] Node mg-cluster-worker3 has CIDR [10.244.1.0/24] 
+2024-07-22T02:39:18.728852629Z stderr F I0722 02:39:18.728780       1 routes.go:62] Adding route {Ifindex: 0 Dst: 10.244.1.0/24 Src: <nil> Gw: 172.18.0.4 Flags: [] Table: 0} 
+2024-07-22T02:39:28.737033384Z stderr F I0722 02:39:28.736681       1 main.go:223] Handling node with IPs: map[172.18.0.5:{}]
+2024-07-22T02:39:28.737066842Z stderr F I0722 02:39:28.736777       1 main.go:250] Node mg-cluster-control-plane has CIDR [10.244.0.0/24] 
+2024-07-22T02:39:28.737068801Z stderr F I0722 02:39:28.736851       1 main.go:223] Handling node with IPs: map[172.18.0.2:{}]
+2024-07-22T02:39:28.737070426Z stderr F I0722 02:39:28.736856       1 main.go:250] Node mg-cluster-worker has CIDR [10.244.3.0/24] 
+2024-07-22T02:39:28.737076009Z stderr F I0722 02:39:28.736875       1 main.go:223] Handling node with IPs: map[172.18.0.3:{}]
+2024-07-22T02:39:28.737077926Z stderr F I0722 02:39:28.736893       1 main.go:227] handling current node
+2024-07-22T02:39:28.737079342Z stderr F I0722 02:39:28.736899       1 main.go:223] Handling node with IPs: map[172.18.0.4:{}]
+2024-07-22T02:39:28.737080676Z stderr F I0722 02:39:28.736901       1 main.go:250] Node mg-cluster-worker3 has CIDR [10.244.1.0/24] 
+2024-07-22T02:39:38.749064514Z stderr F I0722 02:39:38.748692       1 main.go:223] Handling node with IPs: map[172.18.0.5:{}]
+2024-07-22T02:39:38.749088472Z stderr F I0722 02:39:38.748720       1 main.go:250] Node mg-cluster-control-plane has CIDR [10.244.0.0/24] 
+2024-07-22T02:39:38.749090389Z stderr F I0722 02:39:38.748767       1 main.go:223] Handling node with IPs: map[172.18.0.2:{}]
+2024-07-22T02:39:38.749091847Z stderr F I0722 02:39:38.748770       1 main.go:250] Node mg-cluster-worker has CIDR [10.244.3.0/24] 
+2024-07-22T02:39:38.74909318Z stderr F I0722 02:39:38.748788       1 main.go:223] Handling node with IPs: map[172.18.0.3:{}]
+2024-07-22T02:39:38.749094889Z stderr F I0722 02:39:38.748791       1 main.go:227] handling current node
+2024-07-22T02:39:38.749096305Z stderr F I0722 02:39:38.748794       1 main.go:223] Handling node with IPs: map[172.18.0.4:{}]
+2024-07-22T02:39:38.749111305Z stderr F I0722 02:39:38.748797       1 main.go:250] Node mg-cluster-worker3 has CIDR [10.244.1.0/24] 

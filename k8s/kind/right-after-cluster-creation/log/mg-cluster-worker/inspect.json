@@ -1,0 +1,230 @@
+[
+    {
+        "Id": "873c20cc395cdc7f2d84bb827ea72453f2a3896c010694a3f63476627dcb2bd2",
+        "Created": "2024-07-22T02:38:40.128420333Z",
+        "Path": "/usr/local/bin/entrypoint",
+        "Args": [
+            "/sbin/init"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 25859,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2024-07-22T02:38:41.976240668Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:c67167dbf296f41d6bdb58da6945dd0032d56f9cec8195ba56fda76e2d7c1a5e",
+        "ResolvConfPath": "/var/lib/docker/containers/873c20cc395cdc7f2d84bb827ea72453f2a3896c010694a3f63476627dcb2bd2/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/873c20cc395cdc7f2d84bb827ea72453f2a3896c010694a3f63476627dcb2bd2/hostname",
+        "HostsPath": "/var/lib/docker/containers/873c20cc395cdc7f2d84bb827ea72453f2a3896c010694a3f63476627dcb2bd2/hosts",
+        "LogPath": "/var/lib/docker/containers/873c20cc395cdc7f2d84bb827ea72453f2a3896c010694a3f63476627dcb2bd2/873c20cc395cdc7f2d84bb827ea72453f2a3896c010694a3f63476627dcb2bd2-json.log",
+        "Name": "/mg-cluster-worker",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": [
+            "d7dab25e91e28563e08677595118290ee71e662182572d47529c485085b44d77",
+            "4733d26b8d0c259f424e7b6bd60cc92d508d91938560a89c64b9236aa64605d0",
+            "4dd22157198229e0057cd8e0dae9ea6297ff64848c7a8047f6fd846d428dc664"
+        ],
+        "HostConfig": {
+            "Binds": [
+                "/lib/modules:/lib/modules:ro"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "kind",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "on-failure",
+                "MaximumRetryCount": 1
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": true,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": [
+                "seccomp=unconfined",
+                "apparmor=unconfined",
+                "label=disable"
+            ],
+            "Tmpfs": {
+                "/run": "",
+                "/tmp": ""
+            },
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": null,
+            "ReadonlyPaths": null,
+            "Init": false
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/576a4c33c5847ea0c9921b2a8540a4f7da6bb4ac32be5cda0704bd7cfd57ee8d-init/diff:/var/lib/docker/overlay2/a245baa2d876640bca6b79932d0e858ccf818482169c4034069e81663aec0ce5/diff:/var/lib/docker/overlay2/7d3cbc618a8614e738adcab14142e899c61cec5ea75ebb3b12760461220eff94/diff",
+                "MergedDir": "/var/lib/docker/overlay2/576a4c33c5847ea0c9921b2a8540a4f7da6bb4ac32be5cda0704bd7cfd57ee8d/merged",
+                "UpperDir": "/var/lib/docker/overlay2/576a4c33c5847ea0c9921b2a8540a4f7da6bb4ac32be5cda0704bd7cfd57ee8d/diff",
+                "WorkDir": "/var/lib/docker/overlay2/576a4c33c5847ea0c9921b2a8540a4f7da6bb4ac32be5cda0704bd7cfd57ee8d/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/lib/modules",
+                "Destination": "/lib/modules",
+                "Mode": "ro",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "volume",
+                "Name": "358b6f7d20193a0f00cd5b9cbcef90f11ca15eff2f23794c8369d9f70f528724",
+                "Source": "/var/lib/docker/volumes/358b6f7d20193a0f00cd5b9cbcef90f11ca15eff2f23794c8369d9f70f528724/_data",
+                "Destination": "/var",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "mg-cluster-worker",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": true,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "KIND_EXPERIMENTAL_CONTAINERD_SNAPSHOTTER",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "container=docker",
+                "HTTP_PROXY=",
+                "HTTPS_PROXY=",
+                "NO_PROXY="
+            ],
+            "Cmd": null,
+            "Image": "kindest/node:v1.30.0@sha256:047357ac0cfea04663786a612ba1eaba9702bef25227a794b52890dd8bcd692e",
+            "Volumes": {
+                "/var": {}
+            },
+            "WorkingDir": "/",
+            "Entrypoint": [
+                "/usr/local/bin/entrypoint",
+                "/sbin/init"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "io.x-k8s.kind.cluster": "mg-cluster",
+                "io.x-k8s.kind.role": "worker"
+            },
+            "StopSignal": "SIGRTMIN+3"
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "a757278ab181877458bb3085fbad3736e17a3c2c87dcd88d09854e2251fa078c",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "/var/run/docker/netns/a757278ab181",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "kind": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "873c20cc395c",
+                        "mg-cluster-worker"
+                    ],
+                    "NetworkID": "ea4c761513a9f84610d30732f9adaf5894ec1575a7b43841fbf066de5a789154",
+                    "EndpointID": "87b65de4cf29cfbdfc071c0894f932b3d0716ef47b13cc6e1ebace11b7d820fa",
+                    "Gateway": "172.18.0.1",
+                    "IPAddress": "172.18.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "fc00:f853:ccd:e793::1",
+                    "GlobalIPv6Address": "fc00:f853:ccd:e793::2",
+                    "GlobalIPv6PrefixLen": 64,
+                    "MacAddress": "02:42:ac:12:00:02",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]

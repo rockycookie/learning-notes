@@ -48,7 +48,7 @@ ingress-nginx-controller-d45d995d4-hm4fk   1/1     Running     0          2m22s
 
 - `kubectl --context kind-t1-cluster apply -f k8s-manifests.yaml`
 
-- Reachable by ClusterIP
+- Reachable by ClusterIP when calling from inside the cluster/container
 ```
 % kubectl get svc
 NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
@@ -76,18 +76,29 @@ root@t1-cluster-control-plane:/# curl http://10.96.118.129:5678 -v
 * Connection #0 to host 10.96.118.129 left intact
 ```
 
-- Host `test.example.com` is not resolvable
+- Host `test.example.com` is not resolvable when calling from outside the cluster/container
 
 ```
-root@t1-cluster-control-plane:/# curl http://test.example.com:5678 -v
-* Could not resolve host: test.example.com
-* Closing connection 0
-curl: (6) Could not resolve host: test.example.com
+% curl http://test.example.com:5678 --proxy http://localhost:80 -v
+* Host localhost:80 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:80...
+* Connected to localhost (::1) port 80
+> GET http://test.example.com:5678/ HTTP/1.1
+> Host: test.example.com:5678
+> User-Agent: curl/8.6.0
+> Accept: */*
+> Proxy-Connection: Keep-Alive
+> 
+< HTTP/1.1 200 OK
+< Date: Wed, 24 Jul 2024 01:26:26 GMT
+< Content-Type: text/plain; charset=utf-8
+< Content-Length: 24
+< Connection: keep-alive
+< X-App-Name: http-echo
+< X-App-Version: 1.0.0
+< 
+'hello world!! from mz'
+* Connection #0 to host localhost left intact
 ```
-
----> DNS is not working
-
-
-- Visit from outside of the container `http://localhost:80` and `https://localhost:443` get 404
-
----> Ingress is not working

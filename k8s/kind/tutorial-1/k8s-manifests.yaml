@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-config
+data:
+  db.name: database_name 
+  db.svc: another-example-service:port-number
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-label
+  template:
+    metadata:
+      labels:
+        app: example-label
+    spec:
+      containers:
+        - name: example-container
+          image: example-image:tag
+          ports:
+            - containerPort: 8084
+          env:
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: example-config
+                  key: db.name
+            - name: DB_SVC
+              valueFrom:
+                configMapKeyRef:
+                  name: example-config
+                  key: db.svc      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: example-label
+  name: example-service
+spec:
+  selector:
+    app: example-label
+  ports:
+    - protocol: TCP
+      port: 8084
+      targetPort: 8084
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: test.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                 name: example-service
+                 port:
+                   number: 8084

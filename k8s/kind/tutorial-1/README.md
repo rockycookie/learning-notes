@@ -46,72 +46,48 @@ ingress-nginx-controller-d45d995d4-hm4fk   1/1     Running     0          2m22s
 
 ### Apply other manifests
 
-Currently can not find the image; porbably need to:
-1. Create an app image
-2. `kind load docker-image example-docker-image:tag --name test-cluster`
+- `kubectl --context kind-t1-cluster apply -f k8s-manifests.yaml`
+
+- Reachable by ClusterIP
+```
+% kubectl get svc
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+example-service   ClusterIP   10.96.118.129   <none>        5678/TCP   52m
+kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP    57m
+
+
+% docker exec -it 701468a91918 bash
+root@t1-cluster-control-plane:/# curl http://10.96.118.129:5678 -v
+*   Trying 10.96.118.129:5678...
+* Connected to 10.96.118.129 (10.96.118.129) port 5678 (#0)
+> GET / HTTP/1.1
+> Host: 10.96.118.129:5678
+> User-Agent: curl/7.88.1
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< X-App-Name: http-echo
+< X-App-Version: 1.0.0
+< Date: Wed, 24 Jul 2024 01:11:29 GMT
+< Content-Length: 24
+< Content-Type: text/plain; charset=utf-8
+< 
+'hello world!! from mz'
+* Connection #0 to host 10.96.118.129 left intact
+```
+
+- Host `test.example.com` is not resolvable
 
 ```
-% kubectl get pod                                                    
-NAME                                  READY   STATUS             RESTARTS   AGE
-example-deployment-86c859895c-57hhn   0/1     ImagePullBackOff   0          2m6s
-
-
-% kubectl describe pod example-deployment-86c859895c-57hhn
-Name:             example-deployment-86c859895c-57hhn
-Namespace:        default
-Priority:         0
-Service Account:  default
-Node:             t1-cluster-control-plane/172.18.0.2
-Start Time:       Tue, 23 Jul 2024 17:19:19 -0700
-Labels:           app=example-label
-                  pod-template-hash=86c859895c
-Annotations:      <none>
-Status:           Pending
-IP:               10.244.0.8
-IPs:
-  IP:           10.244.0.8
-Controlled By:  ReplicaSet/example-deployment-86c859895c
-Containers:
-  example-container:
-    Container ID:   
-    Image:          example-image:tag
-    Image ID:       
-    Port:           8084/TCP
-    Host Port:      0/TCP
-    State:          Waiting
-      Reason:       ImagePullBackOff
-    Ready:          False
-    Restart Count:  0
-    Environment:
-      DB_NAME:  <set to the key 'db.name' of config map 'example-config'>  Optional: false
-      DB_SVC:   <set to the key 'db.svc' of config map 'example-config'>   Optional: false
-    Mounts:
-      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-mxl84 (ro)
-Conditions:
-  Type                        Status
-  PodReadyToStartContainers   True 
-  Initialized                 True 
-  Ready                       False 
-  ContainersReady             False 
-  PodScheduled                True 
-Volumes:
-  kube-api-access-mxl84:
-    Type:                    Projected (a volume that contains injected data from multiple sources)
-    TokenExpirationSeconds:  3607
-    ConfigMapName:           kube-root-ca.crt
-    ConfigMapOptional:       <nil>
-    DownwardAPI:             true
-QoS Class:                   BestEffort
-Node-Selectors:              <none>
-Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
-                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
-Events:
-  Type     Reason     Age                  From               Message
-  ----     ------     ----                 ----               -------
-  Normal   Scheduled  2m20s                default-scheduler  Successfully assigned default/example-deployment-86c859895c-57hhn to t1-cluster-control-plane
-  Normal   Pulling    47s (x4 over 2m20s)  kubelet            Pulling image "example-image:tag"
-  Warning  Failed     46s (x4 over 2m19s)  kubelet            Failed to pull image "example-image:tag": failed to pull and unpack image "docker.io/library/example-image:tag": failed to resolve reference "docker.io/library/example-image:tag": pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
-  Warning  Failed     46s (x4 over 2m19s)  kubelet            Error: ErrImagePull
-  Warning  Failed     32s (x6 over 2m19s)  kubelet            Error: ImagePullBackOff
-  Normal   BackOff    20s (x7 over 2m19s)  kubelet            Back-off pulling image "example-image:tag"
+root@t1-cluster-control-plane:/# curl http://test.example.com:5678 -v
+* Could not resolve host: test.example.com
+* Closing connection 0
+curl: (6) Could not resolve host: test.example.com
 ```
+
+---> DNS is not working
+
+
+- Visit from outside of the container `http://localhost:80` and `https://localhost:443` get 404
+
+---> Ingress is not working

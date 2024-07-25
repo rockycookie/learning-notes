@@ -4,5 +4,6 @@ References:
 
 Interesting images:
 - https://github.com/kubernetes-sigs/kind/tree/main/images/node
+- https://github.com/kubernetes/ingress-nginx
 - https://github.com/coredns/coredns/tree/master
 - https://github.com/aojea/kindnet

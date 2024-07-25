@@ -72,3 +72,13 @@ spec:
                  name: example-service
                  port:
                    number: 5678
+    - host: test2.example.com
+      http:
+        paths:
+          - path: /mztest
+            pathType: Prefix
+            backend:
+              service:
+                 name: example-service
+                 port:
+                   number: 5678

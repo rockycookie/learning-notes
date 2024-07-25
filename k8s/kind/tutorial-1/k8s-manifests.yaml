@@ -41,7 +41,7 @@ spec:
     app: example-label
   ports:
     - protocol: TCP
-      port: 5678
+      port: 8099
       targetPort: 5678
   type: ClusterIP
 ---
@@ -63,7 +63,7 @@ spec:
               service:
                  name: example-service
                  port:
-                   number: 5678
+                   number: 8099
     - host: test2.example.com
       http:
         paths:
@@ -73,4 +73,4 @@ spec:
               service:
                  name: example-service
                  port:
-                   number: 5678
+                   number: 8099

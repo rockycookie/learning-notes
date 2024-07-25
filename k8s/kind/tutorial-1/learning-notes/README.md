@@ -12,3 +12,5 @@
         ```
     - Find evidence that ingress receives traffic
 - [ ] How ingress work with CoreDNS?
+- [ ] Load balance on KinD
+    - Learn from https://kccnceu2024.sched.com/event/1YhhY

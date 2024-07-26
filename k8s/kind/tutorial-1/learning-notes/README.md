@@ -29,6 +29,7 @@
         1054 www-data  0:00 bash
         1062 www-data  0:00 ps aux
         ```
-- [ ] How ingress work with CoreDNS?
+- [x] How ingress work with CoreDNS?
+    - Nignx `resolver 10.96.0.10 valid=30s` point to the DNS server and dynamically resolve hosts when TTL expires
 - [ ] Load balance on KinD
     - Learn from https://kccnceu2024.sched.com/event/1YhhY

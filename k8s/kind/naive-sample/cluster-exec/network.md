@@ -45,6 +45,16 @@ root@my-kind-control-plane:/etc/kubernetes# ip address
        valid_lft forever preferred_lft forever
 ```
 
+## IP routes
+```
+root@my-kind-control-plane:/# ip route show
+default via 172.18.0.1 dev eth0
+10.244.0.2 dev veth1866ccc2 scope host
+10.244.0.3 dev vetha7b6163e scope host
+10.244.0.4 dev veth5f8bbed3 scope host
+172.18.0.0/16 dev eth0 proto kernel scope link src 172.18.0.2
+```
+
 ## Pod IPs
 - `CoreDNS` gets a pod IP from the overlay network (10.244.x.x), and its traffic is routed through a veth pair created by the CNI plugin (like Flannel or Calico)
     - This veth connects the pod’s network namespace to the host, allowing pod-to-pod communication across nodes
@@ -53,7 +63,7 @@ root@my-kind-control-plane:/etc/kubernetes# ip address
     - These static pods run in the host network namespace (hostNetwork: true), so they use the node’s main interface (eth0) and share its IP (172.18.0.2)
     - **Host network**
 
-```
+```bash
 % kubectl --context kind-my-kind -n kube-system get pods -o wide
 NAME                                            READY   STATUS    RESTARTS   AGE   IP           NODE                    NOMINATED NODE   READINESS GATES
 coredns-7d764666f9-ftwss                        1/1     Running   0          80m   10.244.0.3   my-kind-control-plane   <none>           <none>
@@ -63,5 +73,5 @@ kindnet-n4skb                                   1/1     Running   0          80m
 kube-apiserver-my-kind-control-plane            1/1     Running   0          81m   172.18.0.2   my-kind-control-plane   <none>           <none>
 kube-controller-manager-my-kind-control-plane   1/1     Running   0          81m   172.18.0.2   my-kind-control-plane   <none>           <none>
 kube-proxy-bk2bd                                1/1     Running   0          80m   172.18.0.2   my-kind-control-plane   <none>           <none>
-kube-scheduler-my-kind-control-plane            1/1     Running   0          81m   172.18.0.2   my-kind-control-plane   <none>           <none
+kube-scheduler-my-kind-control-plane            1/1     Running   0          81m   172.18.0.2   my-kind-control-plane   <none>           <none>
 ```

@@ -41,7 +41,7 @@ Image: "nginx-with-ip:latest" with ID "sha256:52a2acb466fc5f3dd525502bf497117712
 Image: "nginx-with-ip:latest" with ID "sha256:52a2acb466fc5f3dd525502bf497117712d8d4dc539742ed5d45ace6015c9f8e" not yet present on node "mutinode-worker", loading...
 Image: "nginx-with-ip:latest" with ID "sha256:52a2acb466fc5f3dd525502bf497117712d8d4dc539742ed5d45ace6015c9f8e" not yet present on node "mutinode-control-plane", loading...
 
-% kubectl --context kind-mutinode apply -f /Users/i519210/SAPDevelop/mengxi-personal/learning-notes/k8s/kind/naive-sample/deploy-app/nginx-deployment.yaml
+% kubectl --context kind-mutinode apply -f /Users/i519210/SAPDevelop/mengxi-personal/learning-notes/k8s/kind/multi-nodes/deploy-app/nginx-deployment.yaml
 deployment.apps/nginx-deployment created
 service/nginx-service created
 ```

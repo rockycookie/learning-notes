@@ -9,6 +9,43 @@ nginx-deployment-84cbf74d95-5nkrp   1/1     Running   0          16s   10.244.2.
 nginx-deployment-84cbf74d95-8dcdh   1/1     Running   0          16s   10.244.3.2   mutinode-worker2   <none>           <none>
 ```
 
+## ARP table (MAC route)
+
+```
+nginx-deployment-84cbf74d95-5nkrp:/# cat /sys/class/net/eth0/address 
+b6:86:94:f6:69:5e
+
+nginx-deployment-84cbf74d95-5nkrp:/# cat /proc/net/arp
+IP address       HW type     Flags       HW address            Mask     Device
+10.244.2.1       0x1         0x2         c6:0f:b5:24:98:69     *        eth0
+
+nginx-deployment-84cbf74d95-5nkrp:/# arp -a
+? (10.244.2.1) at c6:0f:b5:24:98:69 [ether]  on eth0
+```
+
+## IP route
+- helper tool ref: https://codebeautify.org/hex-to-ip-converter
+```
+nginx-deployment-84cbf74d95-5nkrp:/# cat /proc/net/route
+Iface	Destination	Gateway 	Flags	RefCnt	Use	Metric	Mask		MTU	Window	IRTT
+eth0	00000000	0102F40A	0003	0	    0	0	    00000000	0	0	    0
+eth0	0002F40A	0102F40A	0003	0	    0	0	    00FFFFFF	0	0       0
+eth0	0102F40A	00000000	0005	0	    0	0	    FFFFFFFF	0	0	    0
+
+nginx-deployment-84cbf74d95-5nkrp:/# ip route
+default via 10.244.2.1 dev eth0
+10.244.2.0/24 via 10.244.2.1 dev eth0 src 10.244.2.3
+10.244.2.1 dev eth0 scope link src 10.244.2.3
+```
+
+## DNS server
+```
+nginx-deployment-84cbf74d95-5nkrp:/# cat /etc/resolv.conf
+search default.svc.cluster.local svc.cluster.local cluster.local
+nameserver 10.96.0.10
+options ndots:5
+```
+
 ## Traceroute
 ```
 nginx-deployment-84cbf74d95-5nkrp:/# traceroute 10.244.1.3

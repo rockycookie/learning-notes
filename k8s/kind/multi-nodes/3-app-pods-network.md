@@ -32,6 +32,9 @@ eth0	00000000	0102F40A	0003	0	    0	0	    00000000	0	0	    0
 eth0	0002F40A	0102F40A	0003	0	    0	0	    00FFFFFF	0	0       0
 eth0	0102F40A	00000000	0005	0	    0	0	    FFFFFFFF	0	0	    0
 
+nginx-deployment-84cbf74d95-5nkrp:/# cat /proc/net/fib_trie
+...
+
 nginx-deployment-84cbf74d95-5nkrp:/# ip route
 default via 10.244.2.1 dev eth0
 10.244.2.0/24 via 10.244.2.1 dev eth0 src 10.244.2.3

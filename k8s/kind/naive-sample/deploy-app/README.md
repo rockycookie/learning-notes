@@ -2,7 +2,7 @@
 ```
 % docker build -t nginx-with-ip .
 
-% kubectl --context kind-my-kind apply -f /Users/i519210/SAPDevelop/mengxi-personal/learning-notes/k8s/kind/naive-sample/deploy-app/nginx-deployment.yaml
+% kubectl --context kind-my-kind apply -f /<workspace>/mengxi-personal/learning-notes/k8s/kind/naive-sample/deploy-app/nginx-deployment.yaml
 ```
 
 ```

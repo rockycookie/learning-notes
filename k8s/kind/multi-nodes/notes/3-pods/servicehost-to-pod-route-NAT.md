@@ -50,6 +50,15 @@ metadata:
 ```
 
 ## Service IP address
+- Type
+    - ClusterIP: internal-only, virtual IP
+    - NodePort: internal + external, static port on every node
+- How to access nginx-service
+    - from inside the cluster via `10.96.192.176:80`
+    - from outside the cluster via `<NodeIP>:30080`
+    - Notes:
+        - 10.96.192.176: The ClusterIP assigned to the service, used for internal cluster communication
+        - 80:30080/TCP: The service listens on port 80 (for pods), and is exposed externally on port 30080 on each node (NodePort)
 ```
 % kc get svc -o wide --all-namespaces 
 NAMESPACE     NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE     SELECTOR
@@ -58,6 +67,7 @@ default       nginx-service   NodePort    10.96.192.176   <none>        80:30080
 kube-system   kube-dns        ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP   4d11h   k8s-app=kube-dns
 
 
+% kc exec -it nginx-deployment-84cbf74d95-2bg4b -- bash
 nginx-deployment-84cbf74d95-2bg4b:/# nslookup nginx-service.default.svc.cluster.local
 Server:		10.96.0.10
 Address:	10.96.0.10:53

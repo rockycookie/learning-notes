@@ -1,4 +1,4 @@
-# DNS
+# Service Routing
 - `cluster.local` is the default DNS domain for Kubernetes services and pods within a cluster. It is used by CoreDNS to resolve internal service and pod names
     - record format `<service name>.<namespace>.svc.cluster.local`, example: `nginx-service.default.svc.cluster.local`
 - How service domain name reaches the pod
@@ -47,6 +47,23 @@ metadata:
   namespace: kube-system
   resourceVersion: "226"
   uid: a4b3cafd-7ac5-45cf-8682-78a298188ef8
+```
+
+## Service IP address
+```
+% kc get svc -o wide --all-namespaces 
+NAMESPACE     NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                  AGE     SELECTOR
+default       kubernetes      ClusterIP   10.96.0.1       <none>        443/TCP                  4d11h   <none>
+default       nginx-service   NodePort    10.96.192.176   <none>        80:30080/TCP             4d11h   app=nginx
+kube-system   kube-dns        ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP,9153/TCP   4d11h   k8s-app=kube-dns
+
+
+nginx-deployment-84cbf74d95-2bg4b:/# nslookup nginx-service.default.svc.cluster.local
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+Name:	nginx-service.default.svc.cluster.local
+Address: 10.96.192.176
 ```
 
 ## Iptable in a Node

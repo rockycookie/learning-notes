@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: myns
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx-app
+  namespace: myns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-nginx-app
+  template:
+    metadata:
+      labels:
+        app: my-nginx-app
+    spec:
+      containers:
+      - name: myapp
+        image: nginx-with-ip:latest
+        imagePullPolicy: Never  # Ensure the local image is used
+        ports:
+        - containerPort: 80

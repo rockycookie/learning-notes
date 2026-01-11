@@ -21,6 +21,33 @@ Forwarding from [::1]:8080 -> 80
 ```
 Then web is running on browser `http://localhost:8080/productpage`
 
+Here’s the per-hop behavior when you access http://localhost:8080/productpage from your browser (outside the cluster) with Istio and port-forwarding:
+
+1. Browser → Localhost:8080
+  - Your browser sends an HTTP request to 127.0.0.1:8080.
+2. Localhost:8080 → kubectl port-forward
+  - The kubectl port-forward process listens on 8080 and forwards traffic to the Kubernetes Service bookinfo-gateway-istio on port 80 inside the cluster.
+3. kubectl port-forward → ClusterIP Service (bookinfo-gateway-istio)
+  - The request enters the cluster and is routed by kube-proxy to one of the pods backing the Service (the Istio ingress gateway pod).
+4. Service → Istio Ingress Gateway Pod
+  - The request is received by the istio-proxy (Envoy) container in the ingress gateway pod.
+5. Istio Ingress Gateway → ??? HTTPRoute/Gateway
+  - Envoy matches the request to the Gateway and HTTPRoute resources, which route /productpage to the productpage service.
+  - An HTTPRoute is a Kubernetes Gateway API resource that defines how HTTP traffic is routed within your cluster. It works with a Gateway (like Istio’s ingress gateway) to match incoming HTTP requests and direct them to the correct backend service(s).
+  - `kc get httproute --all-namespaces`
+  - `kc get httproute <instance-name> -o yaml`
+  - `kc describe httproute <instance-name> -o yaml`
+6. Ingress Gateway → productpage Service (ClusterIP)
+  - Envoy forwards the request to the productpage Kubernetes Service.
+7. productpage Service → productpage Pod
+  - ??? kube-proxy load-balances the request to one of the productpage-v1 pods.
+8. productpage Pod (with istio-proxy sidecar)
+  - The request first hits the istio-proxy sidecar, which may apply Istio policies, telemetry, etc., then is passed to the productpage app container.
+9. productpage app → Response
+  - The app generates a response, which travels back through the same path in reverse:
+    - productpage app → istio-proxy → Service → ingress gateway → port-forward → browser.
+Each hop may add headers, perform routing, or apply policies depending on your Istio configuration.
+
 ## 06 - Open the application to outside traffic
 ```
 % kc apply -f samples/bookinfo/gateway-api/bookinfo-gateway.yaml

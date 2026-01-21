@@ -40,7 +40,9 @@ Here’s the per-hop behavior when you access http://localhost:8080/productpage 
 6. Ingress Gateway → productpage Service (ClusterIP)
   - Envoy forwards the request to the productpage Kubernetes Service.
 7. productpage Service → productpage Pod
-  - ??? kube-proxy load-balances the request to one of the productpage-v1 pods.
+  - kube-proxy load-balances the request to one of the productpage-v1 pods.
+    - kube-proxy is a Kubernetes component that runs on every node and manages the network rules for Service (ClusterIP) routing
+      - it sets **iptables** (or IPVS) rules on the node to capture traffic sent to the Service’s ClusterIP
 8. productpage Pod (with istio-proxy sidecar)
   - The request first hits the istio-proxy sidecar, which may apply Istio policies, telemetry, etc., then is passed to the productpage app container.
 9. productpage app → Response
